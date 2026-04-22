@@ -37,3 +37,6 @@ It is of 2 types
 2. Empty Fragment:- A shorthand syntax for React.Fragment that does the same thing — groups elements without extra DOM nodes — but doesn't support the key prop.
 
 Note:- we can not write id and className attribute in both fragment.
+
+
+# What is Component Composition?

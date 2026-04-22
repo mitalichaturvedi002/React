@@ -1,13 +1,13 @@
+import Card from "./Card";
 
 const Parent = () => {
 
-    const player = {
     const player1 = {
         username: "Rohit Sharma",
         age: 38,
         team: "MI",
         jersy: 45,
-        skill: ["batting","bowling", "captaincy"],
+        skill: ["batting", "bowling", "captaincy"],
         address: {
             country: "India",
             state: {
@@ -15,15 +15,21 @@ const Parent = () => {
                 city: "Mumbai"
             },
         }
-        skill: "batting",        
-    }    
+    }
 
     const player2 = {
         username: "Virat Kohli",
         age: 36,
         team: "RCB",
         jersy: 18,
-        skill: "batting",        
+        skill: ["batting", "fielding", "running"],
+        address: {
+            country: "India",
+            state: {
+                name: "Delhi",
+                city: "New Delhi"
+            },
+        }
     }
 
     const player3 = {
@@ -31,16 +37,23 @@ const Parent = () => {
         age: 43,
         team: "CSK",
         jersy: 7,
-        skill: "batting",        
+        skill: ["batting", "wicketkeeping", "captaincy"],
+        address: {
+            country: "India",
+            state: {
+                name: "Jharkhand",
+                city: "Ranchi"
+            },
+        }
     }
-        
-    return <div className="parent-component">
-            
-            {/* <Card username="Virat Kohli" age={36} team="RCB" skill="batting" jersy={18} /> */}
 
-            <Card player={player} />
-            <Card {...player1} />
-            <Card {...player2} />
-            <Card {...player3} />
-    </div>
+    return (
+        <div className="parent-component">
+            <Card player={player1} />
+            <Card player={player2} />
+            <Card player={player3} />
+        </div>
+    );
 }
+
+export default Parent;
