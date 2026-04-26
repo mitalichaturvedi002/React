@@ -1,31 +1,14 @@
-import Card from "./Card";
+import Parent from "./Topic-4 map fn/Parent"
+import UL from "./Topic-5 map fn revision/UL"
 
-const Parent = () => {
-
-    const player = {
-        username: "Rohit Sharma",
-        age: 38,
-        team: "MI",
-        jersy: 45,
-        skill: ["batting","bowling", "captaincy"],
-        address: {
-            country: "India",
-            state: {
-                name: "Maharashtra",
-                city: "Mumbai"
-            },
-        }
-    }
-
-    return <div className="parent-component">
-            
-            {/* <Card username="Virat Kohli" age={36} team="RCB" skill="batting" jersy={18} /> */}
-
-            <Card player={player} />
+const App = () => {
+  return (
+    <div className="app-component">
+        <Parent/>
+    <div id="app-component">
+        <UL/>
     </div>
-}
+  );
+};
 
-
-
-
-export default Parent;
+export default App;
