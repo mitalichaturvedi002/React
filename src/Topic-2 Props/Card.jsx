@@ -1,5 +1,5 @@
 const Card = (props) => {
-  const { username, age, team, skill, jersy, address } = props?.player || props;
+  const Card=  ({ username = "Chombhu Singh", age, team, skill, jersy}) =>{}
   const city = address?.state?.city;    
   const name = address?.state?.name;    
 

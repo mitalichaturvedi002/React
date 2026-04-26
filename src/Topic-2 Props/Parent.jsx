@@ -8,13 +8,7 @@ const Parent = () => {
         team: "MI",
         jersy: 45,
         skill: ["batting", "bowling", "captaincy"],
-        address: {
-            country: "India",
-            state: {
-                name: "Maharashtra",
-                city: "Mumbai"
-            },
-        }
+       
     }
 
     const player2 = {
@@ -22,14 +16,6 @@ const Parent = () => {
         age: 36,
         team: "RCB",
         jersy: 18,
-        skill: ["batting", "fielding", "running"],
-        address: {
-            country: "India",
-            state: {
-                name: "Delhi",
-                city: "New Delhi"
-            },
-        }
     }
 
     const player3 = {
@@ -38,20 +24,13 @@ const Parent = () => {
         team: "CSK",
         jersy: 7,
         skill: ["batting", "wicketkeeping", "captaincy"],
-        address: {
-            country: "India",
-            state: {
-                name: "Jharkhand",
-                city: "Ranchi"
-            },
-        }
     }
 
     return (
         <div className="parent-component">
-            <Card player={player1} />
-            <Card player={player2} />
-            <Card player={player3} />
+            <Card {...player1} />
+            <Card {...player2} />
+            <Card {...player3} />
         </div>
     );
 }
