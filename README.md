@@ -266,5 +266,3 @@ It is of 2 types
 2. Function Based Component (FBC)
     i) A  function based component is a simple JavaScript function which returns some piece of JSX.
     ii) It is now  the recommended and most popular way to write components in modern React.
-
-
