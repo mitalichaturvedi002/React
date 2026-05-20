@@ -20,3 +20,5 @@ const Card = ({category, title,image,price}) => {
 }
 
 export default Card
+
+

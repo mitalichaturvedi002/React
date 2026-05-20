@@ -1,19 +1,12 @@
-import {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 
 const ProductPage = () => {
-    const [singleProduct, setSingleProduct] = useState(null);
-    const [loading, setLoading] = useState(false);
-    const {id} = useParams();
-    console.log("id:",id);
   const [singleProduct, setSingleProduct] = useState(null);
   const [count, setCount] = useState(1);
   const [loading, setLoading] = useState(false);
   const { productId } = useParams();
 
-useEffect(() => {
   const [searchParams, setSearchParams] = useSearchParams();
   console.log(searchParams.get("category"));
   console.log(searchParams.get("page"));
@@ -32,11 +25,6 @@ useEffect(() => {
 
     const fetchProducts = async () => {
       try {
-        setLoading(true)
-        const response = await fetch(`https://dummyjson.com/products/${id}`, {
-          cache: "no-store",
-          signal: controller.signal, // step-2 signal
-        });
         setLoading(true);
         const response = await fetch(
           `https://dummyjson.com/products/${productId}`,
@@ -48,7 +36,6 @@ useEffect(() => {
 
         if (!response.ok) throw new Error("Somthing went wrong");
         const data = await response.json();
-        console.log("data:",data);
         console.log("data:", data);
         setSingleProduct(data);
       } catch (error) {
@@ -58,9 +45,6 @@ useEffect(() => {
         }
 
         console.log(error);
-      }
-      finally{
-            setLoading(false)
       } finally {
         setLoading(false);
       }
@@ -73,14 +57,9 @@ useEffect(() => {
     };
   }, []);
 
-
-  if(loading)
-  {
-    return <h1>Loading Products.....</h1>
   if (loading || !singleProduct) {
     return <h1>Loading Products.....</h1>;
   }
-   
 
   const { title, tags, price, description } = singleProduct;
 
@@ -93,10 +72,7 @@ useEffect(() => {
           </div>
         </div>
         <div className="right">
-          {/* <p className="category">{category}</p>
           <div className="title">{title}</div>
-          <div className="description">{customizeDescription}</div>
-          <div className="price">&#x24; {price}</div> */}
           <div className="description">{description}</div>
           <div className="tags-container">
             {tags.map((tag, idx) => (

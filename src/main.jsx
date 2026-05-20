@@ -12,10 +12,15 @@ import NotFound from "./Topic-14 React Routing/pages/NotFound";
 import ProductPage from "./Topic-14 React Routing/pages/ProductPage";
 
 // auth pages
-import Login from "./Topic-14 React Routing/pages/Login";
+import Signup from "./Topic-14 React Routing/pages/Signup";
 
 // Routes
 import ProtectedRoute from "./Topic-14 React Routing/routes/ProtectedRoute";
+
+// apis
+import { getUserProfile } from "./Topic-14 React Routing/services/api";
+import ErrorPage from "./Topic-14 React Routing/pages/ErrorPage";
+
 
 // Routing configuration
 const appRouter = createBrowserRouter([
@@ -28,30 +33,33 @@ const appRouter = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "profile",
-        element: <Profile />,
+        element: <ProtectedRoute />,
+        children: [
+          {
+            path: "profile",
+            element: <Profile />,
+            loader: getUserProfile,
+            errorElement: <ErrorPage/>
+          },
+          {
+            path: "shop",
+            element: <Shop />,
+          },
+          {
+            path: "order",
+            element: <Order />,
+          },
+        ],
       },
       {
-        path: "shop",
-        element: (
-          <ProtectedRoute>
-            <Shop />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "order",
-        element: <Order />,
-      },
-      {
-        path: "products/:id",
+        path: "products/:productId",
         element: <ProductPage />,
       },
     ],
   },
   {
-    path: "/login",
-    element: <Login />,
+    path: "/signup",
+    element: <Signup />,
   },
   {
     path: "*",

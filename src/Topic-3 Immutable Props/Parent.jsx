@@ -1,18 +1,17 @@
-import Card from "./Card";
+import Child from "./Child";
 
-const Parent = ()=>{
+const Parent = () => {
+    const user = {username: "Sid", age: 22} 
 
-    const user={
-        username: "Sid",
-        age:24
-    }
+  return (
+    <div>
+      <h2>Parent Component</h2>
 
-    return (
-           <div>
-        {/*<Child username={username} age={age}/> */}
-        <Child user={user} />
+      <Child user={user} />
     </div>
-    );
-
+  );
 };
+
+
+
 export default Parent;

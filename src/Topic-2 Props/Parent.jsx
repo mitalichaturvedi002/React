@@ -7,15 +7,15 @@ const Parent = () => {
         age: 38,
         team: "MI",
         jersy: 45,
-        skill: ["batting", "bowling", "captaincy"],
-       
-    }
+        skill: "batting",        
+    }    
 
     const player2 = {
         username: "Virat Kohli",
         age: 36,
         team: "RCB",
         jersy: 18,
+        skill: "batting",        
     }
 
     const player3 = {
@@ -23,16 +23,17 @@ const Parent = () => {
         age: 43,
         team: "CSK",
         jersy: 7,
-        skill: ["batting", "wicketkeeping", "captaincy"],
+        skill: "batting",        
     }
-
-    return (
-        <div className="parent-component">
+        
+    return <div className="parent-component">
             <Card {...player1} />
             <Card {...player2} />
             <Card {...player3} />
-        </div>
-    );
+    </div>
 }
+
+
+
 
 export default Parent;
