@@ -1,72 +1,55 @@
 import { createRoot } from "react-dom/client";
 import "./App.css";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {BrowserRouter,Routes, Route} from "react-router-dom";
 
-// pages
+
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+// Pages
 import App from "./App";
-import Home from "./Topic-14 React Routing/pages/Home";
-import Profile from "./Topic-14 React Routing/pages/Profile";
-import Shop from "./Topic-14 React Routing/pages/Shop";
-import Order from "./Topic-14 React Routing/pages/Order";
-import NotFound from "./Topic-14 React Routing/pages/NotFound";
+@@ -15,29 +13,26 @@ import Order from "./Topic-14 React Routing/pages/Order";
 import ProductPage from "./Topic-14 React Routing/pages/ProductPage";
-
-// auth pages
 import Signup from "./Topic-14 React Routing/pages/Signup";
+import Login from "./Topic-14 React Routing/pages/Login";
 
-// Routes
-import ProtectedRoute from "./Topic-14 React Routing/routes/ProtectedRoute";
-
-// apis
-import { getUserProfile } from "./Topic-14 React Routing/services/api";
-import ErrorPage from "./Topic-14 React Routing/pages/ErrorPage";
-
-
-// Routing configuration
-const appRouter = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />,
-    children: [
-      {
-        index: true,
-        element: <Home />,
-      },
-      {
-        element: <ProtectedRoute />,
-        children: [
-          {
-            path: "profile",
-            element: <Profile />,
-            loader: getUserProfile,
-            errorElement: <ErrorPage/>
-          },
-          {
-            path: "shop",
-            element: <Shop />,
-          },
-          {
-            path: "order",
-            element: <Order />,
-          },
-        ],
-      },
-      {
-        path: "products/:productId",
-        element: <ProductPage />,
-      },
-    ],
-  },
-  {
-    path: "/signup",
-    element: <Signup />,
-  },
-  {
-    path: "*",
-    element: <NotFound />,
-  },
-]);
+import { AuthProvider } from "./Topic-14 React Routing/store/AuthContext";
 
 createRoot(document.getElementById("root")).render(
-  <RouterProvider router={appRouter} />,
+ <BrowserRouter>
+  <AuthProvider>
+    <BrowserRouter>
+      <Routes>
+            <Route path="/" element={<App/>} >
+                  <Route index element={<Home/>}  />
+                  <Route element={<ProtectedRoute/>}>
+                    <Route path="profile" element={<Profile/>}  />
+                    <Route path="shop" element={<Shop/>}  />
+                    <Route path="order" element={<Order/>}  />
+                  </Route>
+                  <Route path="products/:productId" element={<ProductPage/>} />
+            </Route>
+            <Route path="/login" element={<Login/>} />
+            <Route path="signup" element={<Signup/>} />
+            <Route path="*" element={<NotFound/>} />
+        <Route element={<ProtectedRoute />}>
+          <Route path="/" element={<App />}>
+            <Route index element={<Home />} />
+            <Route path="profile" element={<Profile />} />
+            <Route path="shop" element={<Shop />} />
+            <Route path="order" element={<Order />} />
+            <Route path="products/:productId" element={<ProductPage />} />
+          </Route>
+        </Route>
+
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </BrowserRouter>
+  </AuthProvider>
 );
+
+
+
+
+
