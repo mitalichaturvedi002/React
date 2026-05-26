@@ -814,26 +814,128 @@ A Protected Route is a route that can only be accessed by authenticated users (l
 - Browsers follow the Same-Origin Policy (security feature) by default, which blocks requests from one domain to another to prevent malicious websites from accessing sensitive data.
 - CORS is the controlled way to relax that restriction.
 
+## 54. How to fix CORS?
 
-## 54. How to fix CORS? 
 #### Step-1: Install cors package
+
 ```
  npm install cors
 ```
+
 #### Step-2: Use cors in backend
+
 ```
 import cors from "cors";
 
 app.use(cors({
   origin: ['http://localhost:3000', 'http://localhost:5173'],   // your frontend URLs
   credentials: true,                                            // if using cookies/auth
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],         // Allowed Methods             
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],         // Allowed Methods
   allowedHeaders: ['Content-Type', 'Authorization']             // Allowed headers
 }));
 ```
 
+## 55. What is useActionData Hook?
 
-- useLoaderData
-- useRouteError
-- useOutletContext
-- useActionData (Monday)
+useActionData is a React Router hook that returns the data returned by the most recently executed action function of the current route.
+
+```
+// Action function (returns data instead of redirecting)
+export const handleSignup = async ({ request }) => {
+    const form = await request.formData();
+    const user = {
+        email: form.get("email"),
+        password: form.get("password")
+    };
+
+    const response = await fetch("http://localhost:3000/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(user)
+    });
+
+    if (!response.ok) {
+        const err = await response.json();
+        return { error: err.message }; // returned, not thrown
+    }
+
+    return redirect("/dashboard");
+};
+```
+
+```
+// Component consuming action data
+import { useActionData } from "react-router-dom";
+
+const Signup = () => {
+    const data = useActionData();
+
+    return (
+        <Form method="post">
+            <input name="email" type="email" />
+            <input name="password" type="password" />
+            {data?.error && <p>{data.error}</p>}
+            <button type="submit">Register</button>
+        </Form>
+    );
+};
+
+## 56. Difference between useState and useRef ?
+1. Purpose:
+
+useState: Used to manage state that affects the UI (reactive state).
+useRef: Used to store mutable values that persist across renders.
+
+
+2. Re-rendering:
+
+useState: Updating state causes the component to re-render.
+useRef: Updating ref.current does not cause re-render.
+
+
+3. Syntax:
+
+useState: const [value, setValue] = useState(initialValue)
+useRef: const ref = useRef(initialValue)
+
+
+4. Access & Update:
+
+useState: Update using setValue(newValue)
+useRef: Update directly ref.current = newValue
+
+5. Use Cases:
+
+useState: Form inputs, counters, toggles, fetched data, UI-dependent values.
+useRef: DOM references (focus, scroll), previous value tracking, timers, mutable flags.
+
+
+6. Performance:
+
+useState: Can be expensive due to re-renders on every update.
+useRef: Lightweight, no re-renders.
+
+
+7. When to Use:
+
+Use useState when you want the UI to update when value changes.
+Use useRef when you just need to "remember" a value without UI update.
+
+## 57. Difference between Controlled Form and Uncontrolled Form? 
+**Controlled:** React controls the form using state + value + onChange.
+Controlled needs more code but gives better control & validation.
+
+**Uncontrolled:** DOM controls the form (using defaultValue or ref).
+Uncontrolled is simpler and faster but harder to validate.
+Uncontrolled is simpler and faster but harder to validate.
+
+
+## 58. What is Context API?
+- Context API is a built-in feature in React that allows you to share data (state, functions, etc.) across multiple components without passing props manually at every level
+- It solves the prop drilling problem.
+
+## 59. How Context API Works?
+
+1. **Create Context** – Using React.createContext()
+2. **Provide Context** – Wrap components with a Provider
+3. **Consume Context** – Access the value using useContext() hook in FBC (or Consumer in class components), In class based component we use **consumer** to take values from the store.
